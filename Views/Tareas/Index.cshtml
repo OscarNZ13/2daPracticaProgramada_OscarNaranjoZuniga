@@ -1,0 +1,67 @@
+﻿@model IEnumerable<_2daPracticaProgramada_OscarNaranjoZuniga.Models.Tarea>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Completada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lista)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Completada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lista.ListaId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TareaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TareaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TareaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
