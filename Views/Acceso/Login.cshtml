@@ -1,4 +1,4 @@
-﻿@model _2daPracticaProgramada_OscarNaranjoZuniga.Models.Usuario
+﻿@model _2daPracticaProgramada_OscarNaranjoZuniga.Models.ViewModels.LoginVM
 
 @{
     Layout = null;
@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registro</title>
+    <title>Login</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
@@ -19,12 +19,11 @@
                 <div class="col-sm-4"
                     <div class="card">
                         <div class="card-header">
-                            Registrate
+                                Iniciar Sesion
                         </div>
-                        <div class="card-body">
+                                <div class="card-body">
 
-                        <form asp-controller="Acceso" asp-action="Registro" method="post">
-                            <input class="form-control mb-3" type="text" placeholder="Nombre Completo" required asp-for="Nombre"/>
+                        <form asp-controller="Acceso" asp-action="Login" method="post">
                             <input class="form-control mb-3" type="text" placeholder="Email" required asp-for="Email"/>
                             <input class="form-control mb-3" type="password" placeholder="Contraseña" required asp-for="Contrasena"/>
 
@@ -32,13 +31,12 @@
                                 <button class="btn btn-primary" type="submit">Registrate</button>
                             </div>
 
-                            @if (ViewData["Mensaje"]!=null){
-                                <div class="alert alert-danger" role="alert">
-                                    @ViewData["Mensaje"]
-                                </div>
-                            }
+                                    @if (ViewData["Mensaje"] != null)
+                                    {
+                                            <div class="alert alert-danger" role="alert">@ViewData["Mensaje"]</div>
+                                    }
 
-                            ¿Ya estas registrado?<a asp-controller="Acceso" asp-action="Login">Iniciar Sesion</a>
+                            ¿No estas registrado?<a asp-controller="Acceso" asp-action="Registro">Registarme</a>
                         </form>
                     </div>
                 </div>
@@ -50,3 +48,4 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
