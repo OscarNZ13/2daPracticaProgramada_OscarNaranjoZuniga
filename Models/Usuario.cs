@@ -16,7 +16,7 @@ namespace _2daPracticaProgramada_OscarNaranjoZuniga.Models
         public DateTime FechaCreacion { get; set; }
 
         // Propiedad de navegación a Listas
-        public required List<Lista> Listas { get; set; }
+        public List<Lista>? Lista { get; set; }
 
     }
 }
