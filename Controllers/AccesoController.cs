@@ -22,15 +22,17 @@ namespace _2daPracticaProgramada_OscarNaranjoZuniga.Controllers
         [HttpPost]
         public async Task<IActionResult> Registro(Usuario Usuario)
         {
+            //Se crea el objeto con la informacion del post
             Usuario User = new Usuario() 
             {Nombre = Usuario.Nombre,
             Email = Usuario.Email,
             Contrasena = Usuario.Contrasena};
 
+            //Se envia a la db
             await _appDbContext.Usuarios.AddAsync(Usuario);
             await _appDbContext.SaveChangesAsync();
 
-            // SI se crea el ususario el id seria diferente de 0, por lo cual se habria registrado
+            // Si se crea el ususario el id seria diferente de 0, por lo cual se habria registrado
             if (Usuario.UsuarioId != 0)
             {
                 return RedirectToAction("Login", "Acceso");
