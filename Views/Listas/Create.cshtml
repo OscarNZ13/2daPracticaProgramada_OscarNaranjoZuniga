@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label asp-for="Titulo" class="control-label"></label>
 
-                <input asp-for="UsuarioId" class="form-control" value="@User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault()" />
+                <input asp-for="UsuarioId" class="form-control" value="@User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault()" hidden />
                 <span asp-validation-for="UsuarioId" class="text-danger"></span>
 
                 <input asp-for="Titulo" class="form-control" />

@@ -57,7 +57,7 @@ namespace _2daPracticaProgramada_OscarNaranjoZuniga.Controllers
             //Esto es por si uno ya esta autenticado y el tiempo de la sesion no ha caducado, entonces no aparecera el login de nuevo:
             if (User.Identity!.IsAuthenticated) 
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Listas");
             }
             return View();
         }
