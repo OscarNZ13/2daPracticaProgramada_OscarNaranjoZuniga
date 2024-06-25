@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using _2daPracticaProgramada_OscarNaranjoZuniga.Models;
+using System.Security.Claims;
 
 namespace _2daPracticaProgramada_OscarNaranjoZuniga.Controllers
 {
@@ -21,7 +17,26 @@ namespace _2daPracticaProgramada_OscarNaranjoZuniga.Controllers
         // GET: Listas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Listas.ToListAsync());
+            //return View(await _context.Listas.ToListAsync());
+
+            // Obtener el ID del usuario logeado
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Verificar si el userId no es nulo
+            if (userId == null)
+            {
+                return Unauthorized(); // O redirigir a la página de login
+            }
+
+            // Convertir el userId a int
+            int userIdInt = int.Parse(userId);
+
+            // Filtrar las listas por el ID del usuario logeado
+            var listas = await _context.Listas
+                                       .Where(l => l.UsuarioId == userIdInt)
+                                       .ToListAsync();
+
+            return View(listas);
         }
 
         // GET: Listas/Details/5
