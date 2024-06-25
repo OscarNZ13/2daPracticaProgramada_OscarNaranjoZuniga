@@ -41,20 +41,9 @@ ALTER TABLE Usuarios
 ADD CONSTRAINT UQ_Email UNIQUE (Email);
 GO
 
--- Crear el login
-CREATE LOGIN TM13 WITH PASSWORD = 'TM2024';
+-- Constraint para poner que el valor de completado de las tareas sea 0 = No completado
+ALTER TABLE Tareas
+ADD CONSTRAINT DF_Tareas_Completada DEFAULT 0 FOR Completada;
 
--- Cambiar al contexto de la base de datos TaskManager
-USE TaskManager;
-
--- Crear el usuario en la base de datos
-CREATE USER TM13 FOR LOGIN TM13;
-
--- Asignar permisos al usuario
-ALTER ROLE db_owner ADD MEMBER TM13;
-
--- Cambiar a la base de datos master
-USE master;
-GO
 
 

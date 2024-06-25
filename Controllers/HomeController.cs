@@ -1,9 +1,11 @@
 using _2daPracticaProgramada_OscarNaranjoZuniga.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace _2daPracticaProgramada_OscarNaranjoZuniga.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

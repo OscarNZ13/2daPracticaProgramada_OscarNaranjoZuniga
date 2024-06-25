@@ -2,6 +2,9 @@
 using _2daPracticaProgramada_OscarNaranjoZuniga.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace _2daPracticaProgramada_OscarNaranjoZuniga.Controllers
 {
@@ -51,6 +54,11 @@ namespace _2daPracticaProgramada_OscarNaranjoZuniga.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            //Esto es por si uno ya esta autenticado y el tiempo de la sesion no ha caducado, entonces no aparecera el login de nuevo:
+            if (User.Identity!.IsAuthenticated) 
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -67,8 +75,32 @@ namespace _2daPracticaProgramada_OscarNaranjoZuniga.Controllers
                 ViewData["Mensaje"] = "Error al encontrar el usuario";
                 return View();
             }
-            
-            return RedirectToAction("Index", "Home");
+
+            // Crear lista de claims para guardar los datos del usuario que queremos que mantenga la sesion:
+            List<Claim> claims = new List<Claim>() 
+            {
+                new Claim(ClaimTypes.NameIdentifier, Usuario_Recibido.UsuarioId.ToString()),
+                new Claim(ClaimTypes.Name, Usuario_Recibido.Nombre),
+                new Claim(ClaimTypes.Email, Usuario_Recibido.Email)
+            };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            AuthenticationProperties properties = new AuthenticationProperties() { AllowRefresh = true, };
+
+            //Acá guardamos la informacion del usuario dentro de las cookies
+            await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(claimsIdentity),
+            properties);
+
+            return RedirectToAction("Index", "Listas");
+        }
+
+        public async Task<IActionResult> CerrarSesion()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Acceso");
         }
     }
 }

@@ -13,11 +13,8 @@ namespace _2daPracticaProgramada_OscarNaranjoZuniga.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime FechaCreacion { get; set; }
 
-        // Propiedad de navegación a Usuario
-        public required Usuario Usuario { get; set; }
-
         // Propiedad de navegación a Tareas
-        public required List<Tarea> Tareas { get; set; }
+        public List<Tarea> Tareas { get; set; } = new List<Tarea>();
 
     }
 }
