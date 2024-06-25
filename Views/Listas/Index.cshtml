@@ -1,0 +1,56 @@
+﻿@model IEnumerable<_2daPracticaProgramada_OscarNaranjoZuniga.Models.Lista>
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Crear nueva lista</a>
+</p>
+<table class="table">
+    <thead>
+        <h3>Listas</h3>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCreacion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ListaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ListaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ListaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
