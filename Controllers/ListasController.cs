@@ -122,7 +122,7 @@ namespace _2daPracticaProgramada_OscarNaranjoZuniga.Controllers
                 {
                     // Manejar la excepción de concurrencia
                     ViewData["Mensaje"] = "Error de concurrencia al intentar guardar los cambios. Inténtalo de nuevo.";
-                    return View(lista);
+                    
                 }
                 catch (DbUpdateException ex)
                 {
